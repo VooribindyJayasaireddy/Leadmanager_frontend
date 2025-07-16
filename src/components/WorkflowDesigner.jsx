@@ -66,7 +66,7 @@ export default function WorkflowDesigner() {
       return toast.warning("No actions to run");
     }
 
-    const res = await fetch(`${API_BASE}/leads`);
+    const res = await fetch("http://localhost:8000/leads");
     const leads = await res.json();
     const newLeads = leads.filter((l) => l.status === "New");
 
@@ -76,7 +76,7 @@ export default function WorkflowDesigner() {
       for (const action of actions) {
         if (action === "Send Email") {
           try {
-            await fetch(`${API_BASE}/send-email`, {
+            await fetch("http://localhost:8000/send-email", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
@@ -105,7 +105,7 @@ export default function WorkflowDesigner() {
 
         if (action === "Update Status") {
           try {
-            await fetch(`${API_BASE}/update-lead`, {
+            await fetch("http://localhost:8000/update-lead", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email: lead.email, status: "Contacted" }),

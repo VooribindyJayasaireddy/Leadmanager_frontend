@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000";
 import { toast } from 'sonner';
 export default function DocumentUpload() {
   const fileRef = useRef(null);
@@ -13,7 +12,7 @@ export default function DocumentUpload() {
 
     const formData = new FormData();
     formData.append("file", file);
-    await fetch(`${API_BASE}/upload-document`, {
+    await fetch("http://localhost:8000/upload-document", {
       method: "POST",
       body: formData,
     });
@@ -42,7 +41,7 @@ export default function DocumentUpload() {
           const file = e.target.files[0];
           const formData = new FormData();
           formData.append("file", file);
-          await fetch(`${API_BASE}/upload-document`, {
+          await fetch("http://localhost:8000/upload-document", {
             method: "POST",
             body: formData,
           });

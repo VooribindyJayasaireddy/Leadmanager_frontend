@@ -1,4 +1,3 @@
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000";
 import { useEffect, useState } from "react";
 
 export default function InteractModal() {
@@ -24,7 +23,7 @@ export default function InteractModal() {
     const userMsg = { sender: "user", text: input };
     setChat((prev) => [...prev, userMsg]);
 
-    const res = await fetch(`${API_BASE}/interact`, {
+    const res = await fetch("http://localhost:8000/interact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: lead.email, query: input }),
