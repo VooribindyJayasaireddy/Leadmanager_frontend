@@ -81,7 +81,7 @@ export default function WorkflowDesigner() {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 to: lead.email,
-                subject: "👋 Hello from Lead Dashboard!",
+                subject: "👋 Hello from PCG group!",
                 message: `Hi ${lead.name},\n\nThank you for your interest in Piazza Consulting Group. We are excited to connect with you and discuss how our team can support your goals. Let us know if you have any questions!\n\nBest regards,\nPiazza Consulting Group`,
               }),
             });

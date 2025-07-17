@@ -40,12 +40,8 @@ export default function LeadTable() {
   );
 
   // Export helper
-  const downloadFile = async (type) => {
-    const url =
-      type === "csv"
-        ? "http://13.221.181.223:8000/export-csv"
-        : "http://13.221.181.223:8000/export-excel";
-
+  const downloadFile = async () => {
+    const url = "http://13.221.181.223:8000/export-csv";
     try {
       const res = await fetch(url);
       if (!res.ok) throw new Error("Failed to fetch");
@@ -53,14 +49,14 @@ export default function LeadTable() {
       const blob = await res.blob();
       const a = document.createElement("a");
       a.href = window.URL.createObjectURL(blob);
-      a.download = `leads.${type === "csv" ? "csv" : "xlsx"}`;
+      a.download = "leads.csv";
       document.body.appendChild(a);
       a.click();
       a.remove();
 
-      toast.success(`Exported ${type.toUpperCase()} successfully`);
+      toast.success("Exported CSV successfully");
     } catch (err) {
-      toast.error(`Failed to export ${type.toUpperCase()}`);
+      toast.error("Failed to export CSV");
       console.error(err);
     }
   };
@@ -93,12 +89,6 @@ export default function LeadTable() {
           className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-2 rounded-md"
         >
           📄 Export CSV
-        </button>
-        <button
-          onClick={() => downloadFile("excel")}
-          className="bg-green-500 hover:bg-green-600 text-white text-sm px-4 py-2 rounded-md"
-        >
-          📊 Export Excel
         </button>
       </div>
 
