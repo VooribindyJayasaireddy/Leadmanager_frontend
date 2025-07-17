@@ -12,7 +12,7 @@ export default function DocumentUpload() {
 
     const formData = new FormData();
     formData.append("file", file);
-    await fetch("http://localhost:8000/upload-document", {
+    await fetch("http://13.221.181.223:8000/upload-document", {
       method: "POST",
       body: formData,
     });
@@ -41,7 +41,7 @@ export default function DocumentUpload() {
           const file = e.target.files[0];
           const formData = new FormData();
           formData.append("file", file);
-          await fetch("http://localhost:8000/upload-document", {
+          await fetch("http://13.221.181.223:8000/upload-document", {
             method: "POST",
             body: formData,
           });

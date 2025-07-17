@@ -6,7 +6,7 @@ export default function LeadTable() {
   const [filter, setFilter] = useState("All");
 
   const fetchLeads = async () => {
-    const res = await fetch("http://localhost:8000/leads");
+    const res = await fetch("http://13.221.181.223:8000/leads");
     const data = await res.json();
     setLeads(data);
   };
@@ -16,7 +16,7 @@ export default function LeadTable() {
   }, []);
 
   const updateStatus = async (email) => {
-    await fetch("http://localhost:8000/update-lead", {
+    await fetch("http://13.221.181.223:8000/update-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, status: "Contacted" }),
@@ -26,7 +26,7 @@ export default function LeadTable() {
   };
 
   const deleteLead = async (email) => {
-    await fetch("http://localhost:8000/delete-lead", {
+    await fetch("http://13.221.181.223:8000/delete-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -43,8 +43,8 @@ export default function LeadTable() {
   const downloadFile = async (type) => {
     const url =
       type === "csv"
-        ? "http://localhost:8000/export-csv"
-        : "http://localhost:8000/export-excel";
+        ? "http://13.221.181.223:8000/export-csv"
+        : "http://13.221.181.223:8000/export-excel";
 
     try {
       const res = await fetch(url);

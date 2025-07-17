@@ -23,7 +23,7 @@ export default function InteractModal() {
     const userMsg = { sender: "user", text: input };
     setChat((prev) => [...prev, userMsg]);
 
-    const res = await fetch("http://localhost:8000/interact", {
+    const res = await fetch("http://13.221.181.223:8000/interact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: lead.email, query: input }),
