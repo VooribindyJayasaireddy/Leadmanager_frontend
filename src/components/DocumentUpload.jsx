@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { toast } from 'sonner';
+
 export default function DocumentUpload() {
   const fileRef = useRef(null);
   const [dragOver, setDragOver] = useState(false);
@@ -12,11 +13,16 @@ export default function DocumentUpload() {
 
     const formData = new FormData();
     formData.append("file", file);
-    await fetch("http://13.221.181.223:8000/upload-document", {
+    const response = await fetch("http://13.221.181.223:8000/api/extract-lead", {
       method: "POST",
       body: formData,
     });
-    toast.success("Document processed and lead created!");
+    if (response.ok) {
+      const lead = await response.json();
+      toast.success(`Lead created: ${lead.name} (${lead.email}, ${lead.phone})`);
+    } else {
+      toast.error("Failed to process document.");
+    }
   };
 
   return (
@@ -41,11 +47,16 @@ export default function DocumentUpload() {
           const file = e.target.files[0];
           const formData = new FormData();
           formData.append("file", file);
-          await fetch("http://13.221.181.223:8000/upload-document", {
+          const response = await fetch("http://13.221.181.223:8000/api/extract-lead", {
             method: "POST",
             body: formData,
           });
-          toast.success("Document processed!");
+          if (response.ok) {
+            const lead = await response.json();
+            toast.success(`Lead created: ${lead.name} (${lead.email}, ${lead.phone})`);
+          } else {
+            toast.error("Failed to process document.");
+          }
         }}
       />
       <p className="text-lg text-gray-600">📄 Drag & drop a document here or click to upload</p>
