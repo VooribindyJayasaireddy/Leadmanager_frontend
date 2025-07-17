@@ -8,7 +8,7 @@ export default function LeadForm() {
     e.preventDefault();
     const formData = new FormData();
     Object.entries(form).forEach(([key, val]) => formData.append(key, val));
-    await fetch(`${API_BASE}/create-lead`, {
+    await fetch("http://13.221.181.223:8000/create-lead", {
       method: "POST",
       body: formData,
     });
